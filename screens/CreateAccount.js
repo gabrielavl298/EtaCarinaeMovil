@@ -1,22 +1,45 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Image, ScrollView  } from 'react-native'
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {colors, Input, Button} from 'react-native-elements'
 
 import Theme from '../constants/Theme'
 import { color } from 'react-native-elements/dist/helpers';
-import { NavigationContainer } from '@react-navigation/native';
 
-const LoginScreen = ({ navigation }) => {
+const CreateAccount = ({ navigation }) => {
     return (
-        <ScrollView style = {styles.container}>
+        <ScrollView  style = {styles.container}>
             <View style= {{flex: 1, alignItems: 'center', justifyContent: 'center'}} >
                 <Image source= {require('../assets/images/icon.png')} style= {styles.logo}/>
             </View>
             <View style= {{flex: 2, alignItems: 'center', paddingTop: 5}}>
-                <Text style={styles.titleTxt}>Login</Text>
+            <Text style={styles.titleTxt}>Create account</Text>
                 <View style={{width: '85%'}}>
+                    <View>
+                        <Input placeholder = 'Username' 
+                            color={Theme.COLORS.SECONDARY}
+                            placeholderTextColor={Theme.COLORS.PLACEHOLDER1}
+                            labelStyle= {{color:  Theme.COLORS.LABEL1}}
+                            label = 'Your username'
+                            leftIcon={ <Icon name='user' size={24} 
+                                color= {Theme.COLORS.ICON1}
+                            />}
+                            autoCompleteType = 'off'
+                        />
+                    </View>
+                    <View>
+                        <Input placeholder = '###-###-####' 
+                            color={Theme.COLORS.SECONDARY}
+                            placeholderTextColor={Theme.COLORS.PLACEHOLDER1}
+                            labelStyle= {{color:  Theme.COLORS.LABEL1}}
+                            label = 'Your phone number'
+                            leftIcon={ <Icon name='phone' size={24} 
+                                color= {Theme.COLORS.ICON1}
+                            />}
+                            autoCompleteType = 'off'
+                        />
+                    </View>
                     <View>
                         <Input placeholder = 'email@address.com' 
                             color={Theme.COLORS.SECONDARY}
@@ -38,40 +61,28 @@ const LoginScreen = ({ navigation }) => {
                             leftIcon={ <Icon name='key' size={24} 
                             color= {Theme.COLORS.ICON1}
                             />}
-
                             secureTextEntry={true}
-                            
-                            
                         />
                     </View>
                     <View style={{alignItems: 'center'}}>
                         <View style={{width:'70%'}}>
                             <Button
-                                title = 'Log in'
+                                title = 'Sign up'
                                 buttonStyle = {{backgroundColor: Theme.COLORS.PRIMARY}}
                             />
                         </View>
                     </View>
-                    <View style={{alignItems: 'center'}}>
-                        <View style={{width:'70%', paddingTop:10}}>
-                            <Button
-                                title = 'Log in with google'
-                                buttonStyle = {{backgroundColor: Theme.COLORS.OTHER.GOOGLEBTN}}
-                                icon = {<Icon name='google' size = {24} color='white' style={{marginRight:7}}/>}
-                            />
-                        </View>
+                    <View style= {{paddingTop: 5, alignItems: 'center'}}>
+                        <Text style={styles.textStyle}> Already have an account?  <Text style={styles.linkText} onPress={() => {navigation.navigate('Login')}}>log in here</Text></Text>
                     </View>
-                    <View style= {{paddingTop: 15, alignItems: 'center'}}>
-                        <Text style={styles.textStyle}> New here?  <Text style={styles.linkText} onPress={() => {navigation.navigate('CreateAccount')}}>create an account</Text></Text>
-                    </View>
+                    <View style={{height:30}} /> 
                 </View>
             </View>
-            
-        </ScrollView>
-    );
+        </ScrollView >
+    )
 }
 
-export default LoginScreen
+export default CreateAccount
 
 const styles = StyleSheet.create({
     container:{
@@ -80,19 +91,16 @@ const styles = StyleSheet.create({
         paddingTop: 10
         
     },
-
     logo:{
         width: '65%',
         height: '61.5%',
         paddingTop: '50%'
     },
-
     titleTxt:{
         fontSize: Theme.SIZES.TEXT.TITLE,
         color: Theme.COLORS.PRIMARY,
         fontWeight: 'bold'
     },
-
     textStyle:{
         color: Theme.COLORS.SECONDARY
     },

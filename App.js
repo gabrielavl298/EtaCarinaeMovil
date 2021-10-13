@@ -1,12 +1,21 @@
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Platform, StatusBar } from 'react-native';
-import LoginScreen from './screens/LoginScreen';
+
+import LoginStack from './navigation/LoginStack';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <View style={styles.container}>
-
-      <LoginScreen/>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="LoginStack" component={LoginStack} options={{ headerShown: false }}/>
+        </Stack.Navigator>
+      </NavigationContainer>
     </View>
   );
 }
