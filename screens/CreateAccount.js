@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View, Image, ScrollView  } from 'react-native'
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -7,7 +7,31 @@ import {colors, Input, Button} from 'react-native-elements'
 import Theme from '../constants/Theme'
 import { color } from 'react-native-elements/dist/helpers';
 
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
+const auth = getAuth();
+
 const CreateAccount = ({ navigation }) => {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('')
+
+
+    async function RegisterUser(){
+        await createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            console.log(user);
+            // ...
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode);
+            // ..
+        });
+    }
     return (
         <ScrollView  style = {styles.container}>
             <View style= {{flex: 1, alignItems: 'center', justifyContent: 'center'}} >
@@ -50,6 +74,8 @@ const CreateAccount = ({ navigation }) => {
                                 color= {Theme.COLORS.ICON1}
                             />}
                             autoCompleteType = 'off'
+                            value = {email}
+                            onChange = {(e) => setEmail(e.nativeEvent.text)}
                         />
                     </View>
                     <View>
@@ -62,6 +88,19 @@ const CreateAccount = ({ navigation }) => {
                             color= {Theme.COLORS.ICON1}
                             />}
                             secureTextEntry={true}
+
+                            value = {password}
+                            onChange = {(e) => setPassword(e.nativeEvent.text)}
+                        />
+                        <Input placeholder = 'Confirm password' 
+                            color={Theme.COLORS.SECONDARY}
+                            placeholderTextColor={Theme.COLORS.PLACEHOLDER1}
+                            labelStyle= {{color:  Theme.COLORS.LABEL1}}
+                            label = 'Confirm your password'  
+                            leftIcon={ <Icon name='key' size={24} 
+                            color= {Theme.COLORS.ICON1}
+                            />}
+                            secureTextEntry={true}
                         />
                     </View>
                     <View style={{alignItems: 'center'}}>
@@ -69,6 +108,7 @@ const CreateAccount = ({ navigation }) => {
                             <Button
                                 title = 'Sign up'
                                 buttonStyle = {{backgroundColor: Theme.COLORS.PRIMARY}}
+                                onPress={() => RegisterUser()}
                             />
                         </View>
                     </View>

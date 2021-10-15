@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -7,7 +7,49 @@ import {colors, Input, Button} from 'react-native-elements'
 import Theme from '../constants/Theme'
 import { color } from 'react-native-elements/dist/helpers';
 
+import {firebaseapp} from '../config/cFirebase'
+import {getAuth, signInWithEmailAndPassword} from 'firebase/auth'
+import { ThemeProvider } from '@react-navigation/native';
+
+const auth = getAuth();
+
 const LoginScreen = ({ navigation }) => {
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const [emailError, setEmailError] = useState("false");
+    const [notFoundError, setNotFoundError] = useState("false");
+
+    useEffect(() => {
+        console.log(emailError);
+    }, [emailError]);
+
+    async function LogIn(){
+        await signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            console.log(user);
+            setEmailError(false);
+            // ...
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorMessage + "\n" +errorCode);
+            console.log("Error code: "+error.code);
+
+            switch(error.code){
+                case "auth/invalid-email":
+                    setEmailError(true);
+                    break;
+                case "auth/invalid-email":
+                    setNotFoundError(true);
+            }
+        });
+    }
+
     return (
         <ScrollView style = {styles.container}>
             <View style= {{flex: 1, alignItems: 'center', justifyContent: 'center'}} >
@@ -25,7 +67,13 @@ const LoginScreen = ({ navigation }) => {
                             leftIcon={ <Icon name='at' size={24} 
                                 color= {Theme.COLORS.ICON1}
                             />}
+                            keyboardType = "email-address"
                             autoCompleteType = 'off'
+                            
+                            inputContainerStyle={ emailError ? {borderColor: Theme.COLORS.ERROR} : {borderColor: Theme.COLORS.INPUT.BORDER}}
+                            errorMessage= { emailError ? 'Email address invalid' : ''}
+                            onChange= {(e) => {setEmail(e.nativeEvent.text)}}
+                            value = {email}
                         />
                     </View>
                     <View>
@@ -39,16 +87,23 @@ const LoginScreen = ({ navigation }) => {
                             />}
 
                             secureTextEntry={true}
+                            onChange = {(e) => {setPassword(e.nativeEvent.text)}}
+                            value = {password}
                             
                             
                         />
                     </View>
                     <View style={{alignItems: 'center'}}>
-                        <View style={{width:'70%'}}>
+                        {notFoundError ? (<View>
+                            <Text style = {{color: Theme.COLORS.ERROR}}>Email or password are incorrect</Text>
+                            </View>) : <View/>
+                        }
+                        <View style={{width:'70%', paddingTop:10}}>
                             <Button
                                 title = 'Log in'
                                 buttonStyle = {{backgroundColor: Theme.COLORS.PRIMARY}}
-                                onPress ={() => {navigation.navigate('DrawerNav')}}
+                                disabled = {password.length == 0 ? true : false}
+                                onPress ={() => {LogIn()}}
                             />
                         </View>
                     </View>

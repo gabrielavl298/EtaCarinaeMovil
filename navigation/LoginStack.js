@@ -8,7 +8,7 @@ const Stack = createNativeStackNavigator();
 
 const LoginStack = () => {
     return(
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName='Login'>
             <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
             <Stack.Screen name="CreateAccount" component={CreateAccount} options={{ headerShown: false }}/>
         </Stack.Navigator>

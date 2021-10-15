@@ -10,7 +10,10 @@ export default{
         SUCCESS: '#4CAF50',
         WARNING: '#FF9800',
         MUTED: '#979797',
-        INPUT: '#DCDCDC',
+        INPUT: {
+          BORDER: '#A3ADB5'
+        },
+        
         ACTIVE: '#9C26B0',
         BUTTON_COLOR: '#9C26B0',
         PLACEHOLDER1: '#884C93',
