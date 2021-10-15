@@ -6,7 +6,6 @@ import {colors, Input, Button} from 'react-native-elements'
 
 import Theme from '../constants/Theme'
 import { color } from 'react-native-elements/dist/helpers';
-import { NavigationContainer } from '@react-navigation/native';
 
 const LoginScreen = ({ navigation }) => {
     return (
@@ -49,6 +48,7 @@ const LoginScreen = ({ navigation }) => {
                             <Button
                                 title = 'Log in'
                                 buttonStyle = {{backgroundColor: Theme.COLORS.PRIMARY}}
+                                onPress ={() => {navigation.navigate('DrawerNav')}}
                             />
                         </View>
                     </View>
