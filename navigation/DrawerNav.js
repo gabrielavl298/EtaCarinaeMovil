@@ -17,7 +17,7 @@ const DrawerNav = () => {
         <Drawer.Navigator drawerContent={props => <DrawerContent {...props}/> }
             screenOptions={{
                 drawerStyle: {
-                backgroundColor: Theme.COLORS.DEFAULT,
+                backgroundColor: Theme.COLORS.PRIMARY,
                 width: 240,
                 },
             }}
@@ -26,7 +26,6 @@ const DrawerNav = () => {
                 options={{
                     title: 'Home', 
                     drawerLabel: 'Home',
-                    backgroundColor: Theme.COLORS.PRIMARY
                 }} 
             />
             <Drawer.Screen name="Cart" component={CartScreen}  options={{title: 'Cart'}}/>
