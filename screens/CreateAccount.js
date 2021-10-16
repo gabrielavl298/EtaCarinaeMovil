@@ -73,6 +73,7 @@ const CreateAccount = ({ navigation }) => {
                             leftIcon={ <Icon name='at' size={24} 
                                 color= {Theme.COLORS.ICON1}
                             />}
+                            keyboardType = "email-address"
                             autoCompleteType = 'off'
                             value = {email}
                             onChange = {(e) => setEmail(e.nativeEvent.text)}

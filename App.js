@@ -17,10 +17,10 @@ const auth = getAuth();
 export default function App() {
 
   const [isLoading, setLoading] = useState(true);
-  const [userToken, setToken] = useState('');
+  const [currentUser, setUser] = useState('');
 
   useEffect(() => {
-    console.log("User token: " +userToken)
+    console.log("User token: " +currentUser)
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
@@ -28,9 +28,12 @@ export default function App() {
         const uid = user.uid;
         console.log(uid);
         setLoading(false);
+        setUser(uid);
+
         // ...
       } else {
         setLoading(false);
+        setUser('');
         console.log("no user");
         // User is signed out
         // ...
@@ -44,7 +47,7 @@ export default function App() {
     <View style={styles.container}>
       <NavigationContainer>
         <Stack.Navigator>
-          {userToken == '' ? (
+          {currentUser == '' ? (
             <>
               <Stack.Screen name="LoginStack" component={LoginStack} options={{ headerShown: false }}/>
             </>

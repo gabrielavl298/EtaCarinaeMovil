@@ -7,7 +7,21 @@ import {
     Text
 } from 'react-native-elements'
 
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+import { getAuth, signOut } from "firebase/auth";
+
+const auth = getAuth();
+
 const DrawerContent = (props) => {
+
+    function LogOut(){
+        signOut(auth).then(() => {
+            // Sign-out successful.
+          }).catch((error) => {
+            // An error happened.
+          });          
+    }
     return (
         <View style ={{flex:1}} >
             <DrawerContentScrollView {...props}>
@@ -29,6 +43,11 @@ const DrawerContent = (props) => {
                     </View>
                 </View>
                 <DrawerItemList {...props} />
+                <DrawerItem
+                label ="Log out"
+                icon = {() => <Icon name="sign-out"/>}
+                onPress = {() => LogOut()}
+            />
             </DrawerContentScrollView>
         </View>
     )
