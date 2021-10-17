@@ -1,10 +1,15 @@
 import React, {useState, useEffect} from 'react'
-import { StyleSheet, Text, View, FlatList, Animated, ScrollView} from 'react-native'
+import { StyleSheet, Text, View, ImageBackground, FlatList, Animated, ScrollView, ActivityIndicator } from 'react-native'
+import { Card, Button  } from 'react-native-elements';
+import LinearGradient from 'react-native-linear-gradient';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Theme from '../constants/Theme';
 
 const HomeScreen = () => {
-
+    /* backgroundColor: `rgba(${(index * 13) % 255}, ${
+                  (index * 35) % 255
+                }, ${(index * 4) % 255}, .5)`*/
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const [scrollViewWidth, setScrollViewWidth] = React.useState(0);
@@ -51,28 +56,48 @@ const HomeScreen = () => {
             ],
           }}>
           <View
-            style={
-              {
-                height: '100%',
-                width: boxWidth,
+            style={{
+                        height: '100%',
                 borderRadius: 24,
-                backgroundColor: `rgba(${(index * 13) % 255}, ${
-                  (index * 35) % 255
-                }, ${(index * 4) % 255}, .5)`,
-              }
-            }>
-            <Text>{item}</Text>
+                backgroundColor: Theme.COLORS.DEFAULT,
+                flex: 1,
+                width: boxWidth
+            }}>
+            <View style = {styles.carouselItemContent}>
+                <View style={{flex: 1}}>
+                    <ImageBackground
+                        source={{ uri: "https://rukminim1.flixcart.com/image/1408/1408/sunglass/r/a/p/0rb3025il9797-rayban-58-original-imadqb2ny5chn6hc.jpeg?q=90" }}
+                        style={{ width: '100%', height: '98%',flex: 1}}
+                    >
+                       <View style= {{flex:1 ,alignSelf:'flex-end', width: '60%', backgroundColor: Theme.COLORS.SECONDARY, opacity: .9}}>
+                        <Card
+                                containerStyle={{opacity: 1, height: '90%', backgroundColor: Theme.COLORS.DEFAULT}}
+                            >
+                                <Card.Divider
+                                    orientation = "vertical"
+                                />
+                                <Card.Title>{item. title}</Card.Title>
+                                <Card.Divider/>
+                                    <Button
+                                    buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: Theme.COLORS.PRIMARY}}
+                                    title='VIEW NOW' />
+                            </Card>
+                       </View>
+                    </ImageBackground>
+                    
+                </View>
+            </View>
           </View>
         </Animated.View>
       );
 
     return (
         <View style={styles.container}>
-            <View >
+            <View>
                 <FlatList
                     horizontal
-                    data={loremWords}
-                    style={{ backgroundColor: '#6b6b6b', height: 250 }}
+                    data={data}
+                    style={{ backgroundColor: Theme.COLORS.PRIMARY, height: 275 }}
                     contentContainerStyle={{ paddingVertical: 16 }}
                     contentInsetAdjustmentBehavior="never"
                     snapToAlignment="center"
@@ -112,5 +137,14 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         backgroundColor: Theme.COLORS.DEFAULT
+    },
+    carouselItemContent:{
+        width: "90%",
+        height: "100%",
+        flexDirection: "row",
+        alignContent: 'center',
+        alignItems : "center",
+        alignSelf:'center',
+
     }
 })
