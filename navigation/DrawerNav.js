@@ -7,8 +7,7 @@ import DrawerContent from '../components/DrawerContent';
 import Theme from '../constants/Theme';
 
 import HomeStack from './HomeStack';
-import ProductViewScreen from '../screens/ProductViewScreen';
-import CartScreen from '../screens/CartScreen';
+import CheckoutStack from './CheckoutStack';
 
 const Drawer = createDrawerNavigator();
 
@@ -28,7 +27,11 @@ const DrawerNav = () => {
                     drawerLabel: 'Home',
                 }} 
             />
-            <Drawer.Screen name="Cart" component={CartScreen}  options={{title: 'Cart'}}/>
+            <Drawer.Screen name="Cart_CheckoutStack" component={CheckoutStack}  
+                options={{
+                    title: 'Cart'
+                    }}
+                />
         </Drawer.Navigator>
     )
 }

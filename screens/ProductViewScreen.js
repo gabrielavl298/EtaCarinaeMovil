@@ -1,12 +1,21 @@
 import React, {useEffect, useState} from 'react'
-import { StyleSheet, View, Image, ScrollView } from 'react-native'
+import { StyleSheet, View, Image, ScrollView, Alert } from 'react-native'
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {colors, Input, Button, Text} from 'react-native-elements'
 
 import Theme from '../constants/Theme'
 
-const ProductViewScreen = () => {
+const ProductViewScreen = ({navigation}) => {
+    function AddToCart(){
+        Alert.alert(
+            "Product added!",
+            "See your cart to view your products ;)",
+            [
+                { text: "OK", onPress: () => navigation.navigate('HomeScreen')}
+            ]
+        );
+    }
     return (
         <View style = {styles.container}>
             <View style = {styles.productImageContainer}>
@@ -35,7 +44,7 @@ const ProductViewScreen = () => {
                     title = 'ADD TO CART'
                     icon = {<Icon name='shopping-cart' size = {15} color='white' style = {{marginRight: 10}}/>}
                     buttonStyle = {{backgroundColor: Theme.COLORS.PRIMARY, marginTop: 20}}
-                    onPress ={() => {}}
+                    onPress ={() => {AddToCart()}}
                 />
             </View>
         </View>
