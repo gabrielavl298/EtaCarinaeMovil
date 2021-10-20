@@ -6,6 +6,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Theme from '../constants/Theme';
 
+import {collection, getDocs} from 'firebase/firestore'
+import db from '../config/cFirebase'
+
 const HomeScreen = () => {
     /* backgroundColor: `rgba(${(index * 13) % 255}, ${
                   (index * 35) % 255
@@ -33,9 +36,16 @@ const HomeScreen = () => {
         }
     }
 
+    const getCuentas = async () => {
+        const datos = await getDocs(collection(db, 'cuentas'));
+        console.log(datos.docs);
+
+    }
+
     
     useEffect(() => {
         getMovies();
+        getCuentas();
     }, []);
 
     const renderItem = ({ item, index }) => (
