@@ -9,7 +9,7 @@ import Theme from '../constants/Theme';
 import {collection, getDocs} from 'firebase/firestore'
 import db from '../config/cFirebase'
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
     /* backgroundColor: `rgba(${(index * 13) % 255}, ${
                   (index * 35) % 255
                 }, ${(index * 4) % 255}, .5)`*/
@@ -90,7 +90,9 @@ const HomeScreen = () => {
                                 <Card.Divider/>
                                     <Button
                                     buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: Theme.COLORS.PRIMARY}}
-                                    title='VIEW NOW' />
+                                    title='VIEW NOW' 
+                                    onPress = {() => {navigation.navigate('ProductScreen')}}
+                                    />
                             </Card>
                        </View>
                     </ImageBackground>

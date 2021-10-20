@@ -6,7 +6,7 @@ import DrawerContent from '../components/DrawerContent';
 
 import Theme from '../constants/Theme';
 
-import HomeScreen from '../screens/HomeScreen';
+import HomeStack from './HomeStack';
 import ProductViewScreen from '../screens/ProductViewScreen';
 import CartScreen from '../screens/CartScreen';
 
@@ -22,7 +22,7 @@ const DrawerNav = () => {
                 },
             }}
         >
-            <Drawer.Screen name="Home" component={HomeScreen}  
+            <Drawer.Screen name="HomeStack" component={HomeStack}  
                 options={{
                     title: 'Home', 
                     drawerLabel: 'Home',
