@@ -7,9 +7,8 @@ import {colors, Input, Button} from 'react-native-elements'
 import Theme from '../constants/Theme'
 import { color } from 'react-native-elements/dist/helpers';
 
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-
-const auth = getAuth();
+import { auth } from '../config/cFirebase';
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const CreateAccount = ({ navigation }) => {
 

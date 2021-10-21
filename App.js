@@ -7,12 +7,13 @@ import DrawerNav from './navigation/DrawerNav';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { auth } from './config/cFirebase';
+import { onAuthStateChanged } from "firebase/auth";
+
 
 import Theme from './constants/Theme';
 
 const Stack = createNativeStackNavigator();
-const auth = getAuth();
 
 export default function App() {
 

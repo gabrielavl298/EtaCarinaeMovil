@@ -1,5 +1,6 @@
 import {initializeApp} from 'firebase/app';
-import {getFirestore} from 'firebase/firestore'
+import {getFirestore, collection, getDocs} from 'firebase/firestore'
+import { getAuth } from 'firebase/auth'
 
 
 const firebaseConfig = {
@@ -11,7 +12,8 @@ const firebaseConfig = {
   appId: "1:605036753784:web:6c08c744b3b0e2a75c0e8d"
   };
 
-  const firebaseapp = initializeApp(firebaseConfig);
-  const db = getFirestore(firebaseapp);
+  export const firebaseapp = initializeApp(firebaseConfig);
+  export const db = getFirestore(firebaseapp);
+  export const auth = getAuth(firebaseapp);
 
-  export default db;
+  export const productDocs = async () => await getDocs(collection(db, 'cuentas'));

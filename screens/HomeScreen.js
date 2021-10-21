@@ -6,8 +6,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Theme from '../constants/Theme';
 
-import {collection, getDocs} from 'firebase/firestore'
-import db from '../config/cFirebase'
+import {collection, getDocs, getDocsFromServer, getDocFromCache} from 'firebase/firestore'
+import {firebaseapp, db, productDocs} from '../config/cFirebase'
 
 const HomeScreen = ({ navigation }) => {
     /* backgroundColor: `rgba(${(index * 13) % 255}, ${
@@ -36,16 +36,33 @@ const HomeScreen = ({ navigation }) => {
         }
     }
 
-    const getCuentas = async () => {
-        const datos = await getDocs(collection(db, 'cuentas'));
-        console.log(datos.docs);
+    async function getCuentas () {
+     /* const datos =  []
+        await getDocs(collection(db, 'cuentas')).then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            datos.push(doc)
+          });
+        });*/
+        /*console.log("from cFire", productDocs.docs);
+        console.log("From local", datos);*/
 
     }
 
     
     useEffect(() => {
         getMovies();
-        getCuentas();
+        
+        const GetProducts = async() => {
+          const querySnapshot = await getDocs(collection(db, "/productoInfo"));
+          console.log("querySnapshot is empty", querySnapshot.empty)
+          console.log("Object", querySnapshot)
+          querySnapshot.forEach((doc) => {
+            console.log(`${doc.id} => ${doc.data()}`);
+          });
+        }
+
+        GetProducts();
+
     }, []);
 
     const renderItem = ({ item, index }) => (

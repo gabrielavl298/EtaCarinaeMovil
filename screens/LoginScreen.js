@@ -7,11 +7,9 @@ import {colors, Input, Button} from 'react-native-elements'
 import Theme from '../constants/Theme'
 import { color } from 'react-native-elements/dist/helpers';
 
-import {firebaseapp} from '../config/cFirebase'
-import {getAuth, signInWithEmailAndPassword} from 'firebase/auth'
+import { auth } from '../config/cFirebase'
+import {signInWithEmailAndPassword} from 'firebase/auth'
 import { ThemeProvider } from '@react-navigation/native';
-
-const auth = getAuth();
 
 const LoginScreen = ({ navigation }) => {
 
